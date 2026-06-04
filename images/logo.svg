@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="100%" height="100%">
+  <!-- Definition for Gradients -->
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" /> <!-- Emerald Green -->
+      <stop offset="100%" stop-color="#059669" /> <!-- Dark Emerald -->
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" /> <!-- Blue -->
+      <stop offset="100%" stop-color="#0EA5E9" /> <!-- Sky Blue -->
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" /> <!-- Amber/Gold -->
+      <stop offset="100%" stop-color="#D97706" /> <!-- Dark Gold -->
+    </linearGradient>
+  </defs>
+
+  <!-- Logo Icon -->
+  <g transform="translate(10, 10)">
+    <!-- Outer Glow / Soft Circle Background -->
+    <circle cx="50" cy="50" r="48" fill="#F0FDF4" stroke="#E6F4EA" stroke-width="2" />
+    
+    <!-- Left Hand (Blue Accent) -->
+    <path d="M 28,62 C 28,45 36,35 48,35 C 50,35 52,36 54,37 C 46,43 44,52 48,60 C 51,66 56,70 62,72 C 58,78 48,82 38,76 C 31,72 28,67 28,62 Z" fill="url(#accentGrad)" opacity="0.85" />
+    
+    <!-- Right Hand (Gold Accent) -->
+    <path d="M 72,62 C 72,45 64,35 52,35 C 50,35 48,36 46,37 C 54,43 56,52 52,60 C 49,66 44,70 38,72 C 42,78 52,82 62,76 C 69,72 72,67 72,62 Z" fill="url(#goldGrad)" opacity="0.85" />
+    
+    <!-- Center Heart/Leaf (Emerald Green) -->
+    <path d="M 50,28 C 55,22 66,26 66,38 C 66,50 50,66 50,66 C 50,66 34,50 34,38 C 34,26 45,22 50,28 Z" fill="url(#logoGrad)" />
+    
+    <!-- Supporting Hands Arc (Unity Ribbon) -->
+    <path d="M 22,68 C 30,86 50,92 68,86 C 73,83 78,80 82,75 C 80,78 75,83 70,86 C 52,94 30,88 22,68 Z" fill="url(#logoGrad)" />
+  </g>
+
+  <!-- Logo Typography -->
+  <!-- "InAmigos" text -->
+  <text x="130" y="62" font-family="'Outfit', 'Plus Jakarta Sans', sans-serif" font-size="38" font-weight="800" letter-spacing="-0.5">
+    <tspan fill="#0f172a">In</tspan><tspan fill="#10B981">Amigos</tspan>
+  </text>
+  
+  <!-- "FOUNDATION" subtext -->
+  <text x="132" y="85" font-family="'Plus Jakarta Sans', 'Outfit', sans-serif" font-size="12" font-weight="700" fill="#64748B" letter-spacing="7">
+    FOUNDATION
+  </text>
+</svg>
