@@ -1,0 +1,11 @@
+# Dependency directories
+node_modules/
+Task 2/node_modules/
+
+# OS files
+.DS_Store
+
+# Temporary / testing screenshot files
+Task 2/home_test.png
+Task 2/discovered_links.json
+Task 2/screenshots/

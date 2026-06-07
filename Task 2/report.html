@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Website Analysis & Improvement Report - InAmigos Foundation</title>
+  <style>
+    /* CSS Variables matching InAmigos Redesign Tokens */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+    :root {
+      --primary: #1E3A8A; /* Midnight Navy */
+      --secondary: #10B981; /* Emerald Green */
+      --accent: #F59E0B; /* Amber */
+      --dark: #1F2937; /* Slate 800 */
+      --light: #F9FAFB; /* Gray 50 */
+      --border: #E5E7EB; /* Gray 200 */
+      --text-muted: #6B7280; /* Gray 500 */
+      --red: #EF4444; /* Red 500 */
+      --white: #FFFFFF;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background-color: var(--white);
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    /* Print & Page Setup */
+    .page {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 10px 0;
+      box-sizing: border-box;
+      page-break-after: avoid;
+      page-break-inside: avoid;
+    }
+
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    /* Cover Page (Minimal, Light & Premium) */
+    .cover-page {
+      height: 235mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 45px;
+      background: var(--white);
+      color: var(--dark);
+      border: 1px solid var(--border);
+      position: relative;
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.02) 0%, rgba(16, 185, 129, 0.02) 100%);
+    }
+
+    .cover-accent-strip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    }
+
+    .cover-header {
+      margin-top: 50px;
+    }
+
+    .cover-tagline {
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .cover-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .cover-title span {
+      color: var(--secondary);
+    }
+
+    .cover-desc {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .cover-meta {
+      border-top: 1px solid var(--border);
+      padding-top: 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .meta-list p {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .meta-list strong {
+      color: var(--dark);
+    }
+
+    .cover-logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -1px;
+    }
+
+    .cover-logo span {
+      color: var(--secondary);
+    }
+
+    /* Section Headings */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 6px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+    }
+
+    .section-title span {
+      color: var(--secondary);
+    }
+
+    .section-title.danger-theme {
+      border-bottom-color: var(--red);
+      color: var(--red);
+    }
+
+    .section-title.danger-theme span {
+      color: var(--dark);
+    }
+
+    p {
+      margin-bottom: 12px;
+      text-align: justify;
+      color: #374151;
+      font-size: 0.95rem;
+    }
+
+    /* Callout Box */
+    .info-callout {
+      background-color: var(--light);
+      border-left: 4px solid var(--primary);
+      padding: 15px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-callout.danger {
+      border-left-color: var(--red);
+      background-color: rgba(239, 68, 68, 0.01);
+    }
+
+    .info-callout h4 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      color: var(--dark);
+    }
+
+    .info-callout p {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Table of Contents */
+    .toc-list {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    .toc-name {
+      font-weight: 600;
+      background-color: var(--white);
+      padding-right: 5px;
+    }
+
+    .toc-dots {
+      flex-grow: 1;
+      border-bottom: 1px dotted var(--text-muted);
+      margin-bottom: 4px;
+      opacity: 0.5;
+    }
+
+    .toc-page {
+      font-weight: 700;
+      color: var(--primary);
+      padding-left: 5px;
+    }
+
+    /* Code Blocks */
+    pre {
+      background-color: #0F172A;
+      color: #E2E8F0;
+      padding: 12px 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      margin-bottom: 15px;
+      border: 1px solid #1E293B;
+    }
+
+    .code-danger {
+      color: #F87171;
+      font-weight: bold;
+    }
+
+    /* Cards */
+    .compare-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background-color: var(--white);
+    }
+
+    .compare-header {
+      background-color: var(--light);
+      padding: 10px 15px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .compare-header h3 {
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+
+    .badge {
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+
+    .badge.critical { background-color: var(--red); }
+    .badge.high { background-color: var(--accent); }
+    .badge.medium { background-color: var(--secondary); }
+
+    .compare-body {
+      padding: 15px;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .pane-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pane-title.before { color: var(--red); }
+    .pane-title.after { color: var(--secondary); }
+
+    .img-box {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--light);
+      height: 180px; /* Highly compact height to fit exactly on A4 page */
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .mobile-img-box {
+      height: 300px; /* Compact mobile image height */
+    }
+
+    .analysis-text {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 12px;
+    }
+
+    .text-section h4 {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+      padding-left: 6px;
+    }
+
+    .text-section.impact-sec h4 {
+      border-left-color: var(--red);
+      color: var(--red);
+    }
+
+    .text-section ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .text-section li {
+      margin-bottom: 4px;
+      font-size: 0.85rem;
+      color: #374151;
+      position: relative;
+      padding-left: 12px;
+    }
+
+    .text-section li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .text-section.impact-sec li::before {
+      color: var(--red);
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background-color: var(--light);
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.01);
+    }
+
+    .text-check { color: var(--secondary); font-weight: bold; }
+    .text-cross { color: var(--red); font-weight: bold; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ================= PAGE 1: COVER PAGE ================= -->
+  <div class="page cover-page">
+    <div class="cover-accent-strip"></div>
+    
+    <div class="cover-header">
+      <div class="cover-tagline">InAmigos Foundation</div>
+      <h1 class="cover-title">Website Analysis &<br><span>Improvement Report</span></h1>
+      <div class="cover-desc">
+        A professional, technical usability and security audit assessing design grids, mobile viewport breakpoints, typography structures, and template vulnerabilities.
+      </div>
+    </div>
+
+    <div class="cover-meta">
+      <div class="meta-list">
+        <p>Prepared By: <strong>Deepak Raj (Product Development Intern)</strong></p>
+        <p>Focus Area: <strong>UI/UX Usability, SEO Hardening, & Responsiveness</strong></p>
+        <p>Date: <strong>June 2026</strong></p>
+        <p>Live URL Audited: <strong>https://inamigosfoundation.org.in</strong></p>
+      </div>
+      <div class="cover-logo">
+        <span>In</span>Amigos
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 2: TABLE OF CONTENTS & SUMMARY ================= -->
+  <div class="page page-break">
+    <h2 class="section-title">Table of <span>Contents</span></h2>
+    <ul class="toc-list">
+      <li class="toc-item">
+        <span class="toc-name">1. Executive Summary</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">Page 2</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-name">2. Critical Security Analysis (SEO Spam Malware)</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">Page 3</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-name">3. UI/UX Audit Part 1: Navigation & Hero Section</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">Page 4</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-name">4. UI/UX Audit Part 2: Readability & Core Counters</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">Page 5</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-name">5. UI/UX Audit Part 3: Team Data & Blog Truncation</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">Page 6</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-name">6. Responsive Audit Part 4: Mobile Contact Layout Breakage</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">Page 7</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-name">7. Technical Roadmap & Redesign Comparison Matrix</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">Page 8</span>
+      </li>
+    </ul>
+
+    <h2 class="section-title" style="margin-top: 30px;">1. Executive <span>Summary</span></h2>
+    <p>
+      This audit presents a thorough evaluation of the live digital presence of the **InAmigos Foundation** (`https://inamigosfoundation.org.in`). Operating as an active Section 8 NGO, the foundation's landing site is its primary brand tool for securing CSR sponsorships, organizing local volunteers, and accepting public donations.
+    </p>
+    <p>
+      The core focus of this analysis is dual-faceted: identifying usability friction points that degrade brand confidence and diagnosing serious structural security concerns. In addition to assessing layout alignments, counter label typography, and mobile responsive grid scaling, we address a critical template hijacking issue currently active on the live site.
+    </p>
+    
+    <div class="info-callout">
+      <h4>Key Usability & Security Objectives:</h4>
+      <p>
+        The goal is to move the organization's landing site away from generic, cluttered layout systems and vulnerable templates, transitioning toward a premium, modern, glassmorphic UI. This report highlights how these changes are fully realized in the proposed **Task 1 Code Redesign**.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 3: SECURITY THREATS ================= -->
+  <div class="page page-break">
+    <h2 class="section-title danger-theme">2. Critical Security <span>Analysis</span></h2>
+    
+    <div class="info-callout danger">
+      <h4 style="color:var(--red);">Threat Status: Critical Malware Link Injection Active</h4>
+      <p>
+        Our code inspection revealed active, malicious link injections within the live web templates. Hidden container tags (`&lt;div&gt;` blocks styled absolute off-screen) have been embedded, loaded with keywords targeting online gambling and pharmaceutical sites.
+      </p>
+    </div>
+
+    <p>
+      Below is an exact snippet extracted from the live site's DOM source code:
+    </p>
+    <pre>
+&lt;!-- Discovered SEO Spam Injection Block --&gt;
+&lt;div style="position: absolute; left: -9999px; top: -9999px;"&gt;
+  &lt;a href="<span class="code-danger">https://shopnoit.com/</span>"&gt;online gambling slot&lt;/a&gt;
+  &lt;a href="<span class="code-danger">https://webwideit.solutions/</span>"&gt;trusted online casino bd&lt;/a&gt;
+  &lt;a href="<span class="code-danger">https://www.perfumelabsbd.com/</span>"&gt;slot game online&lt;/a&gt;
+&lt;/div&gt;</pre>
+
+    <h3>Negative Impacts on NGO Credibility</h3>
+    <ul>
+      <li style="margin-bottom:8px; font-size:0.92rem;">
+        <strong>Search Engine Index Penalties:</strong> Crawlers detect these spam links and immediately flag the site's authority. This severely hurts organic rankings, making search queries for the NGO's projects fail.
+      </li>
+      <li style="margin-bottom:8px; font-size:0.92rem;">
+        <strong>Browser Safety Blocklists:</strong> If left unaddressed, modern browsers like Google Chrome and Firefox will flag the domain as compromised, throwing a red warning screen ("Deceptive site ahead") to donors.
+      </li>
+    </ul>
+
+    <h3 style="margin-top: 15px;">Mitigation & Clean-up Roadmap</h3>
+    <p>
+      Mitigation requires scanning global layouts (like WordPress header files, template engines, or theme directories), stripping out all off-screen hidden divs, updating database tables, resetting SSH/FTP credentials, and deploying a secure web application firewall (WAF).
+    </p>
+  </div>
+
+  <!-- ================= PAGE 4: DETAILED AUDIT - HERO ================= -->
+  <div class="page page-break">
+    <h2 class="section-title">3. UI/UX Audit: <span>Navigation & Hero</span></h2>
+
+    <div class="compare-card">
+      <div class="compare-header">
+        <h3>Header Navigation and Hero Visual Hierarchy</h3>
+        <span class="badge critical">Critical</span>
+      </div>
+      <div class="compare-body">
+        <div class="compare-grid">
+          <div>
+            <div class="pane-title before">Before: Live Website (Annotated)</div>
+            <div class="img-box">
+              <img src="screenshots_annotated/home_hero_annotated.png" alt="Live Site Hero Page">
+            </div>
+          </div>
+          <div>
+            <div class="pane-title after">After: Redesigned Task 1 Website</div>
+            <div class="img-box">
+              <img src="screenshots/local_home_hero.png" alt="Redesigned Task 1 Hero">
+            </div>
+          </div>
+        </div>
+
+        <div class="analysis-text">
+          <div class="text-section impact-sec">
+            <h4>Observed Usability Flaws</h4>
+            <ul>
+              <li><strong>[Badge 1] Low-Res Logo:</strong> The header logo is blurry, and the subtitle tagline text under it is pixelated and unreadable.</li>
+              <li><strong>[Badge 2] Dead Social Links:</strong> Header social icons link to generic platforms instead of NGO handles, including a defunct Google+ icon.</li>
+              <li><strong>[Badge 3] Image Slider:</strong> Slider features low-quality images of dark containers, lacking emotional branding.</li>
+            </ul>
+          </div>
+          <div class="text-section">
+            <h4>Redesign UX Solutions (Task 1)</h4>
+            <ul>
+              <li><strong>Sharp Vector Brand Logo:</strong> Standardized high-res PNG logo adapting cleanly to glassmorphic header changes.</li>
+              <li><strong>Correct Handles & CTAs:</strong> Fixed social profiles and primary CTAs ("Volunteer Now", "Donate Us") with prominent hover states.</li>
+              <li><strong>Modern Glassmorphic Dark Mode:</strong> High-end futuristic styling integrates with background elements.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 5: DETAILED AUDIT - ABOUT & STATS ================= -->
+  <div class="page page-break">
+    <h2 class="section-title">4. UI/UX Audit: <span>Readability & Counters</span></h2>
+
+    <div class="compare-card">
+      <div class="compare-header">
+        <h3>About Text Readability & Statistics Alignment</h3>
+        <span class="badge high">High Priority</span>
+      </div>
+      <div class="compare-body">
+        <div class="compare-grid">
+          <div>
+            <div class="pane-title before">Before: Live About Section (Annotated)</div>
+            <div class="img-box">
+              <img src="screenshots_annotated/home_about_annotated.png" alt="Live About Section">
+            </div>
+          </div>
+          <div>
+            <div class="pane-title after">After: Redesigned About Section</div>
+            <div class="img-box">
+              <img src="screenshots/local_home_about.png" alt="Redesigned About Section">
+            </div>
+          </div>
+        </div>
+
+        <div class="analysis-text">
+          <div class="text-section impact-sec">
+            <h4>Observed Usability Flaws</h4>
+            <ul>
+              <li><strong>[Badge 4] Dense Text Block:</strong> About text is a single massive paragraph. Key credentials (80G, 12A, CSR-1) are lost.</li>
+              <li><strong>[Badge 5] Typographical Errors:</strong> Statistics labels are ungrammatical: "6 OUR CAUSES" and "150+ Our Volunteer" (no 's').</li>
+            </ul>
+          </div>
+          <div class="text-section">
+            <h4>Redesign UX Solutions (Task 1)</h4>
+            <ul>
+              <li><strong>Structured Text Paragraphs:</strong> Broken into clean paragraphs with an accented ISO 9001 badge layout.</li>
+              <li><strong>Aligned Metrics:</strong> Clear label formats ("50,000+ Lives Impacted", "200+ Active Volunteers").</li>
+              <li><strong>Readability Focus:</strong> Clear Poppins and Inter typography scale with a line-height of 1.6.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 6: DETAILED AUDIT - TEAM & BLOG ================= -->
+  <div class="page page-break">
+    <h2 class="section-title">5. UI/UX Audit: <span>Team Data & Blogs</span></h2>
+
+    <div class="compare-card">
+      <div class="compare-header">
+        <h3>Subpage Quality: Volunteers List and Blog Cards</h3>
+        <span class="badge medium">Medium Priority</span>
+      </div>
+      <div class="compare-body">
+        <div class="compare-grid">
+          <div>
+            <div class="pane-title before">Before: Live Volunteers (Annotated)</div>
+            <div class="img-box">
+              <img src="screenshots_annotated/volunteers_annotated.png" alt="Live Volunteers Page">
+            </div>
+          </div>
+          <div>
+            <div class="pane-title before">Before: Live Blog (Annotated)</div>
+            <div class="img-box">
+              <img src="screenshots_annotated/blog_annotated.png" alt="Live Blog Page">
+            </div>
+          </div>
+        </div>
+
+        <div class="analysis-text">
+          <div class="text-section impact-sec">
+            <h4>Observed Usability Flaws</h4>
+            <ul>
+              <li><strong>[Badge 6] Dummy Data Errors:</strong> Displays fake emails (`jhfgjufv@gmail.com`), lowercase states ("Uttar pradesh"), and typos.</li>
+              <li><strong>[Badge 7] Blog Layout:</strong> Heading titles are truncated ("Project Vikas: Transformi...") despite extra page width. Hardcoded dates for all posts.</li>
+            </ul>
+          </div>
+          <div class="text-section">
+            <h4>Redesign UX Solutions (Task 1)</h4>
+            <ul>
+              <li><strong>Clean Cards & Tags:</strong> Structured cards with category tags (e.g. child education, environment) and real profiles.</li>
+              <li><strong>Un-truncated Blog Grid:</strong> Multi-line title containers adapt cleanly without overflowing.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 7: DETAILED AUDIT - MOBILE ================= -->
+  <div class="page page-break">
+    <h2 class="section-title">6. Responsive Audit: <span>Mobile Viewport</span></h2>
+
+    <div class="compare-card">
+      <div class="compare-header">
+        <h3>Mobile Responsiveness Breakage in Contact Section</h3>
+        <span class="badge critical">Critical</span>
+      </div>
+      <div class="compare-body">
+        <div class="compare-grid">
+          <div>
+            <div class="pane-title before">Before: Live Mobile View (Annotated)</div>
+            <div class="img-box mobile-img-box">
+              <img src="screenshots_annotated/mobile_contact_annotated.png" alt="Live Mobile View Breakage">
+            </div>
+          </div>
+          <div>
+            <div class="pane-title after">After: Redesigned Mobile Stack</div>
+            <div class="img-box mobile-img-box">
+              <img src="screenshots/local_mobile_contact.png" alt="Redesigned Mobile Contact Stack">
+            </div>
+          </div>
+        </div>
+
+        <div class="analysis-text">
+          <div class="text-section impact-sec">
+            <h4>Observed Usability Flaws</h4>
+            <ul>
+              <li><strong>[Badge 8] Layout Breakage:</strong> At 375px widths, contact info blocks (Address and Email) stay side-by-side.</li>
+              <li><strong>Text Cutoff:</strong> Words overlap, details wrap into unreadable strings, and borders intersect.</li>
+            </ul>
+          </div>
+          <div class="text-section">
+            <h4>Redesign UX Solutions (Task 1)</h4>
+            <ul>
+              <li><strong>Mobile Media Queries:</strong> Target mobile viewports under 768px.</li>
+              <li><strong>Clean Vertical Stacking:</strong> Layout dynamically transitions to a 1-column stack, resolving overlap concerns.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 8: ROADMAP & CONCLUSION ================= -->
+  <div class="page page-break">
+    <h2 class="section-title">7. Actionable <span>Roadmap & Matrix</span></h2>
+    
+    <p>
+      Below is a comparative breakdown of the improvements implemented in your new codebase:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category / Audit Target</th>
+          <th>Live Website (Current)</th>
+          <th>Redesigned Website (Proposed)</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Security Vulnerability</strong></td>
+          <td><span class="text-cross">✘ Insecure:</span> Injected malware redirect scripts in templates.</td>
+          <td><span class="text-check">✔ Clean:</span> Sanitized static code preventing tag/script injection.</td>
+          <td>Resolved</td>
+        </tr>
+        <tr>
+          <td><strong>Brand Logo & Taglines</strong></td>
+          <td><span class="text-cross">✘ Blurry:</span> Pixelated low-resolution banner logo image.</td>
+          <td><span class="text-check">✔ Sharp:</span> Optimized images with proper dimensions and layout.</td>
+          <td>Resolved</td>
+        </tr>
+        <tr>
+          <td><strong>Social Menu Actions</strong></td>
+          <td><span class="text-cross">✘ Placeholders:</span> Links point to generic platform domains. Defunct Google+ icon.</td>
+          <td><span class="text-check">✔ Complete:</span> Updated active profiles and removed obsolete networks.</td>
+          <td>Resolved</td>
+        </tr>
+        <tr>
+          <td><strong>About Section Content</strong></td>
+          <td><span class="text-cross">✘ Hard to read:</span> Dense text wall lacking paragraph breaks.</td>
+          <td><span class="text-check">✔ Readable:</span> Divided into styled paragraphs with highlighted details.</td>
+          <td>Resolved</td>
+        </tr>
+        <tr>
+          <td><strong>Mobile Responsiveness</strong></td>
+          <td><span class="text-cross">✘ Broken:</span> Overlapped layout containers on mobile screens.</td>
+          <td><span class="text-check">✔ Stacking:</span> Flexible CSS grid adapting to mobile viewports.</td>
+          <td>Resolved</td>
+        </tr>
+        <tr>
+          <td><strong>Aesthetic Experience</strong></td>
+          <td><span class="text-cross">✘ Outdated:</span> Standard navigation templates, flat layouts.</td>
+          <td><span class="text-check">✔ Modern:</span> Glassmorphism, scroll indicators, and dark/light modes.</td>
+          <td>Resolved</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 15px; margin-bottom: 8px;">Prioritized Fix Implementation Order</h3>
+    <ol style="margin-left: 20px; margin-bottom: 15px; font-size: 0.9rem;">
+      <li style="margin-bottom: 6px;"><strong>Phase 1 (Immediate - Security):</strong> Replace compromised files with sanitized code from your Task 1 index.html. Reset SSH/database login credentials.</li>
+      <li style="margin-bottom: 6px;"><strong>Phase 2 (UX Correction):</strong> Deploy the updated style.css stylesheet to fix layout overlap issues on mobile viewports.</li>
+      <li style="margin-bottom: 6px;"><strong>Phase 3 (Polishing Content):</strong> Standardize database volunteer profiles and update blog cards with correct timestamps.</li>
+    </ol>
+  </div>
+
+</body>
+</html>
